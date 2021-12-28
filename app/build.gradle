@@ -26,12 +26,12 @@ android {
         debug {
             buildConfigField ("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
             buildConfigField ("String", "MOVIES_API_KEY", "\"093dc9e65ead21a56c9a9615b1132b53\"")
-            buildConfigField ("String", "MOVIES_IMAGE_URL", "\"https://image.tmdb.org/t/p/w400\"")
+            buildConfigField ("String", "MOVIES_IMAGE_URL", "\"https://image.tmdb.org/t/p/w300\"")
         }
         release {
             buildConfigField ("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
             buildConfigField ("String", "MOVIES_API_KEY", "\"093dc9e65ead21a56c9a9615b1132b53\"")
-            buildConfigField ("String", "MOVIES_IMAGE_URL", "\"https://image.tmdb.org/t/p/w400\"")
+            buildConfigField ("String", "MOVIES_IMAGE_URL", "\"https://image.tmdb.org/t/p/w300\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -49,6 +49,7 @@ dependencies {
     def nav_version = "2.3.5"
     def retrofit_version = "2.9.0"
     def lifecycle_version = "2.4.0"
+    def glide_version = "4.12.0"
 
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
@@ -77,8 +78,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
 //  GLIDE
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
 
 }

@@ -1,7 +1,5 @@
 package com.krancpiler.basicmoviesapp.ui.home
 
-import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +9,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.krancpiler.basicmoviesapp.BuildConfig
 import com.krancpiler.basicmoviesapp.R
-import com.krancpiler.basicmoviesapp.data.network.models.TrendingModel
+import com.krancpiler.basicmoviesapp.data.network.models.MovieModel
 
-class TrendingAdapter (private val data: ArrayList<TrendingModel>): RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>() {
+class TrendingAdapter (private val data: ArrayList<MovieModel>): RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>() {
 
     class TrendingViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val imageView = view.findViewById<AppCompatImageView>(R.id.trending_image)

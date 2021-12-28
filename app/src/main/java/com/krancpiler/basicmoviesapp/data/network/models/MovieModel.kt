@@ -2,7 +2,7 @@ package com.krancpiler.basicmoviesapp.data.network.models
 
 import com.google.gson.annotations.SerializedName
 
-data class TrendingModel(
+data class MovieModel(
     val backdrop_path:String,
     val original_language:String,
     val original_title:String,

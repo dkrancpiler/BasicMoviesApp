@@ -6,5 +6,9 @@ import okhttp3.MediaType
 class MoviesRepository(
     private val moviesService: MoviesService
 ) {
-    suspend fun getTrendingMovies(mediaType: String, timeWindow: String) = moviesService.getTrendingMovies(mediaType, timeWindow)
+    suspend fun getTrendingMovies(mediaType: String, timeWindow: String)
+        = moviesService.getTrendingMovies(mediaType, timeWindow)
+
+    suspend fun searchMovies(keyword: String)
+        = moviesService.searchMovies(keyword)
 }
