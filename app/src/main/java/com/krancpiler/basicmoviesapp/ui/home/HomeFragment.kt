@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.krancpiler.basicmoviesapp.databinding.FragmentHomeBinding
 import com.krancpiler.basicmoviesapp.utility.dismissProgress
 import com.krancpiler.basicmoviesapp.utility.showProgress
+import com.krancpiler.basicmoviesapp.utility.showSimpleMessageDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,11 +56,15 @@ class HomeFragment: Fragment() {
                 binding.trendingRecycler.adapter = TrendingAdapter(it)
                 dismissProgress()
             }
-            else showProgress()
         })
         homeViewModel.searchList.observe(viewLifecycleOwner, {
             if (it != null) {
                 Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
+            }
+        })
+        homeViewModel.errorMessage.observe(viewLifecycleOwner, {
+            if (it != null) {
+                showSimpleMessageDialog(it)
             }
         })
     }

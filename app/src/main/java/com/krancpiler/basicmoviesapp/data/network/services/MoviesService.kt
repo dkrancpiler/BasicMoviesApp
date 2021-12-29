@@ -1,7 +1,7 @@
 package com.krancpiler.basicmoviesapp.data.network.services
 
 import com.krancpiler.basicmoviesapp.utility.APIConstants
-import com.krancpiler.basicmoviesapp.data.network.models.BaseResponse
+import com.krancpiler.basicmoviesapp.data.network.models.BasePaginatedResponse
 import com.krancpiler.basicmoviesapp.data.network.models.MovieModel
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,11 +13,11 @@ interface MoviesService {
     suspend fun getTrendingMovies(
         @Path("media_type") mediaType: String,
         @Path("time_window") timeWindow: String,
-    ): Response<BaseResponse<ArrayList<MovieModel>>>
+    ): Response<BasePaginatedResponse<ArrayList<MovieModel>>>
 
     @GET(APIConstants.SEARCH_MOVIES)
     suspend fun searchMovies(
         @Query("query") keyword: String
-    ): Response<BaseResponse<ArrayList<MovieModel>>>
+    ): Response<BasePaginatedResponse<ArrayList<MovieModel>>>
 
 }

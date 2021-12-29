@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">BasicMoviesApp</string>
     <string name="progress_dialog_message">Please wait</string>
+    <string name="confirm">ok</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
 </resources>

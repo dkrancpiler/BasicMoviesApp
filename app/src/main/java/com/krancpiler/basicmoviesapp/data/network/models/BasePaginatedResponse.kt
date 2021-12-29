@@ -1,6 +1,6 @@
 package com.krancpiler.basicmoviesapp.data.network.models
 
-data class BaseResponse<T>(
+data class BasePaginatedResponse<T>(
     val page:Int,
     val results:T
 )

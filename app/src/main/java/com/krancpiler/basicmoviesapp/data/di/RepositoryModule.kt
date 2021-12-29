@@ -1,6 +1,8 @@
 package com.krancpiler.basicmoviesapp.data.di
 
+import com.krancpiler.basicmoviesapp.data.network.repo.AuthRepository
 import com.krancpiler.basicmoviesapp.data.network.repo.MoviesRepository
+import com.krancpiler.basicmoviesapp.data.network.services.AuthService
 import com.krancpiler.basicmoviesapp.data.network.services.MoviesService
 import dagger.Module
 import dagger.Provides
@@ -14,4 +16,8 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideMoviesRepository(moviesService: MoviesService) = MoviesRepository(moviesService)
+
+    @Singleton
+    @Provides
+    fun provideAuthRepository(authService: AuthService) = AuthRepository(authService)
 }
