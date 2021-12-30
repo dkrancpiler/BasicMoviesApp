@@ -1,4 +1,4 @@
-package com.krancpiler.basicmoviesapp.ui.login
+package com.krancpiler.basicmoviesapp.ui.prelogin
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.krancpiler.basicmoviesapp.R
+import com.krancpiler.basicmoviesapp.data.storage.entities.UserModel
 import com.krancpiler.basicmoviesapp.databinding.FragmentLoginBinding
 import com.krancpiler.basicmoviesapp.utility.showSimpleMessageDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment: Fragment() {
+class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
@@ -35,6 +36,8 @@ class LoginFragment: Fragment() {
             if (it.success) loginViewModel.createLastingSession()
         })
         loginViewModel.lastingSessionResponse.observe(viewLifecycleOwner, {
+            val userModel = UserModel(0, it.session_id, binding.usernameInput.text.toString())
+            loginViewModel.storeUserInfo(userModel)
             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         })
         loginViewModel.errorMessage.observe(viewLifecycleOwner, {
@@ -48,7 +51,11 @@ class LoginFragment: Fragment() {
         binding.finishLoginButton.setOnClickListener { view ->
             val username = binding.usernameInput.text.toString()
             val password = binding.passwordInput.text.toString()
-            loginViewModel.createLoginSession(username, password, loginViewModel.requestTokenResponse.value!!.request_token)
+            loginViewModel.createLoginSession(
+                username,
+                password,
+                loginViewModel.requestTokenResponse.value!!.request_token
+            )
         }
     }
 

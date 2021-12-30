@@ -7,4 +7,5 @@ object RegularConstants {
 
     const val NETWORK_ERROR_ARRAY_VALUE = "errors"
     const val NETWORK_ERROR_GENERATE_SESSION = "status_message"
+    const val DATABASE_NAME = "MovieDB"
 }

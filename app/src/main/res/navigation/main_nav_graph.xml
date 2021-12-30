@@ -10,7 +10,7 @@
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.krancpiler.basicmoviesapp.ui.login.LoginFragment"
+        android:name="com.krancpiler.basicmoviesapp.ui.prelogin.LoginFragment"
         android:label="LoginFragment" >
         <action
             app:popUpTo="@id/loginFragment"
