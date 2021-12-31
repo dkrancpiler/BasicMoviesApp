@@ -8,5 +8,6 @@ data class UserModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val sessionId: String,
-    val userName: String
+    val userName: String,
+    val isAuthorized: Boolean
 )

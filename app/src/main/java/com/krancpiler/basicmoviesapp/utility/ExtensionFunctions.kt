@@ -2,6 +2,7 @@ package com.krancpiler.basicmoviesapp.utility
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import com.krancpiler.basicmoviesapp.MainActivity
 import com.krancpiler.basicmoviesapp.ui.dialogs.ProgressDialog
 import com.krancpiler.basicmoviesapp.ui.dialogs.SimpleMessageDialog
 import com.krancpiler.basicmoviesapp.utility.RegularConstants.NETWORK_ERROR_ARRAY_VALUE
@@ -27,6 +28,11 @@ fun Fragment.dismissProgress() {
 fun Fragment.showSimpleMessageDialog(message: String) {
     val dialog = SimpleMessageDialog().newInstance(message.replaceFirstChar { it.uppercase() })
     dialog.show(this.childFragmentManager, SIMPLE_MESSAGE_DIALOG_TAG)
+}
+
+fun Fragment.changeToolbarTitle(title: String) {
+    val activity = this.activity as MainActivity
+    activity.changeToolbarTitle(title)
 }
 // View Models
 

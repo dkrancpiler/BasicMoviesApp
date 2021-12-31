@@ -18,6 +18,8 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/username_input"
         android:layout_marginTop="5dp"
+        android:imeOptions="actionNext"
+        android:inputType="text"
         app:layout_constraintTop_toBottomOf="@id/username_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -34,6 +36,8 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/password_input"
         android:layout_marginTop="5dp"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/password_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

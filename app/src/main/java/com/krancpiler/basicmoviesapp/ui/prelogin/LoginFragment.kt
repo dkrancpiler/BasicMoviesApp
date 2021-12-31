@@ -1,9 +1,12 @@
 package com.krancpiler.basicmoviesapp.ui.prelogin
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -36,9 +39,9 @@ class LoginFragment : Fragment() {
             if (it.success) loginViewModel.createLastingSession()
         })
         loginViewModel.lastingSessionResponse.observe(viewLifecycleOwner, {
-            val userModel = UserModel(0, it.session_id, binding.usernameInput.text.toString())
+            val userModel = UserModel(0, it.session_id, binding.usernameInput.text.toString(), true)
             loginViewModel.storeUserInfo(userModel)
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            findNavController().navigate(R.id.loginToHome)
         })
         loginViewModel.errorMessage.observe(viewLifecycleOwner, {
             if (it != null) {
@@ -48,7 +51,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun init() {
-        binding.finishLoginButton.setOnClickListener { view ->
+        binding.finishLoginButton.setOnClickListener {
             val username = binding.usernameInput.text.toString()
             val password = binding.passwordInput.text.toString()
             loginViewModel.createLoginSession(
@@ -56,6 +59,14 @@ class LoginFragment : Fragment() {
                 password,
                 loginViewModel.requestTokenResponse.value!!.request_token
             )
+        }
+        binding.passwordInput.setOnEditorActionListener{view, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+                binding.finishLoginButton.performClick()
+                true
+            } else false
         }
     }
 
