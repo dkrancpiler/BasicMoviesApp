@@ -27,12 +27,14 @@ android {
         debug {
             buildConfigField ("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
             buildConfigField ("String", "MOVIES_API_KEY", "\"093dc9e65ead21a56c9a9615b1132b53\"")
-            buildConfigField ("String", "MOVIES_IMAGE_URL", "\"https://image.tmdb.org/t/p/w300\"")
+            buildConfigField ("String", "MOVIES_IMAGE_URL", "\"https://image.tmdb.org/t/p/w400\"")
+            buildConfigField ("String", "EMPTY_IMAGE_URL", "\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/128px-No_image_available.svg.png\"")
         }
         release {
             buildConfigField ("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
             buildConfigField ("String", "MOVIES_API_KEY", "\"093dc9e65ead21a56c9a9615b1132b53\"")
-            buildConfigField ("String", "MOVIES_IMAGE_URL", "\"https://image.tmdb.org/t/p/w300\"")
+            buildConfigField ("String", "MOVIES_IMAGE_URL", "\"https://image.tmdb.org/t/p/w400\"")
+            buildConfigField ("String", "EMPTY_IMAGE_URL", "\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/128px-No_image_available.svg.png\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -52,6 +54,7 @@ dependencies {
     def lifecycle_version = "2.4.0"
     def glide_version = "4.12.0"
     def roomVersion = "2.4.0"
+    def paging_version = "3.1.0"
 
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
@@ -79,7 +82,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
-//  GLIDE
+//    GLIDE
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
@@ -89,6 +92,8 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
+//    PAGINATION
+    implementation("androidx.paging:paging-runtime:$paging_version")
 
 }
 

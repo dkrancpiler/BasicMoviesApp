@@ -9,4 +9,6 @@
     <string name="logout">Logout</string>
     <string name="movies">Movies</string>
     <string name="guest">Guest</string>
+
+    <string name="surround_with_parentheses">(%s)</string>
 </resources>

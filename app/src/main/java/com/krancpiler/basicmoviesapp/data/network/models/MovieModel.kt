@@ -1,12 +1,10 @@
 package com.krancpiler.basicmoviesapp.data.network.models
 
-import com.google.gson.annotations.SerializedName
-
 data class MovieModel(
     val backdrop_path:String,
     val original_language:String,
     val original_title:String,
-    val poster_path:String,
+    val poster_path:String?,
     val title:String,
     val overview:String,
     val release_date:String,

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="75dp"
+    android:paddingBottom="@dimen/standard_vertical_padding"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title_text"
         android:layout_width="0dp"
         android:textAlignment="center"
         android:layout_height="wrap_content"
-        app:layout_constraintHeight_min="40dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@id/trending_image"
-        app:layout_constraintEnd_toEndOf="@id/trending_image"/>
+        app:layout_constraintStart_toStartOf="@id/search_image"
+        app:layout_constraintEnd_toEndOf="@id/search_image"/>
     <androidx.appcompat.widget.AppCompatImageView
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/title_text"
-        android:id="@+id/trending_image"
-        android:layout_width="200dp"
-        android:layout_height="400dp"/>
+        android:id="@+id/search_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

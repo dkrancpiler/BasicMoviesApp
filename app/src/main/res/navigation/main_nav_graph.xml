@@ -7,43 +7,32 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.krancpiler.basicmoviesapp.ui.home.HomeFragment"
-        android:label="HomeFragment" >
-        <action
-            android:id="@+id/homeToSingle"
-            app:destination="@id/singleMovieFragment" />
-    </fragment>
+        android:label="HomeFragment"></fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.krancpiler.basicmoviesapp.ui.prelogin.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true"
             android:id="@+id/loginToHome"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.krancpiler.basicmoviesapp.ui.prelogin.SplashScreenFragment"
-        android:label="SplashScreenFragment" >
-        <action
-            android:id="@+id/splashToLogin"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        android:label="SplashScreenFragment">
         <action
             android:id="@+id/splashToHome"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <action
         android:id="@+id/globalActionLogin"
@@ -52,18 +41,40 @@
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim"
-        app:popUpTo="@id/loginFragment"
+        app:popUpTo="@id/main_nav_graph"
         app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/singleMovieFragment"
         android:name="com.krancpiler.basicmoviesapp.ui.home.singleMovie.SingleMovieFragment"
-        android:label="SingleMovieFragment" >
+        android:label="SingleMovieFragment">
         <argument
             android:name="movieId"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
         <argument
             android:name="movieName"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.krancpiler.basicmoviesapp.ui.home.search.SearchFragment"
+        android:label="SearchFragment">
+        <argument
+            android:name="searchQuery"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/globalActionSingleMovie"
+        app:destination="@id/singleMovieFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+        android:id="@+id/globalSearchFragment"
+        app:destination="@id/searchFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
 </navigation>

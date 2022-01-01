@@ -12,6 +12,8 @@ import com.krancpiler.basicmoviesapp.utility.RegularConstants.SIMPLE_MESSAGE_DIA
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 // Fragments
 
@@ -32,6 +34,7 @@ fun Fragment.changeToolbarTitle(title: String) {
     val activity = this.activity as MainActivity
     activity.changeToolbarTitle(title)
 }
+
 // View Models
 
 fun ViewModel.getErrorMessageFromListRequest(errorBody: ResponseBody): String {
@@ -43,4 +46,10 @@ fun ViewModel.getErrorMessageFromListRequest(errorBody: ResponseBody): String {
 fun ViewModel.getErrorMessageFromRequests(errorBody: ResponseBody): String {
     val jsonObject = JSONObject(errorBody.string())
     return jsonObject.getString(NETWORK_ERROR_GENERATE_SESSION)
+}
+
+// Strings
+
+fun String.getYearFromString(): String {
+    return this.substring(range = IntRange(0, 3))
 }

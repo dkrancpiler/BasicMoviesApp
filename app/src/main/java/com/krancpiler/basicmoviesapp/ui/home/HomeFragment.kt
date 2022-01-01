@@ -1,23 +1,17 @@
 package com.krancpiler.basicmoviesapp.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.krancpiler.basicmoviesapp.MainActivity
+import com.krancpiler.basicmoviesapp.MainNavGraphDirections
 import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.databinding.FragmentHomeBinding
-import com.krancpiler.basicmoviesapp.ui.home.singleMovie.SingleMovieFragmentDirections
 import com.krancpiler.basicmoviesapp.utility.changeToolbarTitle
 import com.krancpiler.basicmoviesapp.utility.dismissProgress
 import com.krancpiler.basicmoviesapp.utility.showProgress
@@ -48,14 +42,6 @@ class HomeFragment: Fragment() {
         changeToolbarTitle(resources.getString(R.string.movies))
         showProgress()
         binding.trendingRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.searchEditText.setOnEditorActionListener{ view, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(view.windowToken, 0)
-                homeViewModel.searchMovies(view.text.toString())
-                true
-            } else false
-        }
     }
 
     private fun setUpObservers() {
@@ -64,15 +50,10 @@ class HomeFragment: Fragment() {
                 val adapter = TrendingAdapter(it)
                 binding.trendingRecycler.adapter = adapter
                 adapter.onItemClick = {movieModel ->
-                    val action = HomeFragmentDirections.homeToSingle(movieModel.id, movieModel.title)
+                    val action = MainNavGraphDirections.globalActionSingleMovie(movieModel.id, movieModel.title)
                     findNavController().navigate(action)
                 }
                 dismissProgress()
-            }
-        })
-        homeViewModel.searchList.observe(viewLifecycleOwner, {
-            if (it != null) {
-                Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
             }
         })
         homeViewModel.errorMessage.observe(viewLifecycleOwner, {

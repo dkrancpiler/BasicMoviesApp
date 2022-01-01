@@ -1,8 +1,11 @@
 package com.krancpiler.basicmoviesapp
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import com.krancpiler.basicmoviesapp.databinding.ActivityMainBinding
@@ -25,7 +28,17 @@ class MainActivity : AppCompatActivity() {
         binding.logoutText.setOnClickListener {
             mainViewModel.deleteUserInfo()
             binding.toolbar.visibility = View.GONE
-            findNavController( R.id.nav_host_fragment).navigate(R.id.globalActionLogin)
+            findNavController(R.id.nav_host_fragment).navigate(R.id.globalActionLogin)
+        }
+        binding.searchEditText.setOnEditorActionListener{ view, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+//                homeViewModel.searchMovies(view.text.toString())
+                val action = MainNavGraphDirections.globalSearchFragment(view.text.toString())
+                findNavController(R.id.nav_host_fragment).navigate(action)
+                true
+            } else false
         }
     }
 

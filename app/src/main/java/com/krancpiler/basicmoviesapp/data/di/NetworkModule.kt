@@ -1,6 +1,5 @@
 package com.krancpiler.basicmoviesapp.data.di
 
-import androidx.viewbinding.BuildConfig
 import com.krancpiler.basicmoviesapp.data.network.MoviesApiKeyInterceptor
 import dagger.Module
 import dagger.Provides

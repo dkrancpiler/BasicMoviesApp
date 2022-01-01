@@ -20,7 +20,8 @@ interface MoviesService {
 
     @GET(SEARCH_MOVIES)
     suspend fun searchMovies(
-        @Query("query") keyword: String
+        @Query("query") keyword: String,
+        @Query("page") page: Int
     ): Response<BasePaginatedResponse<ArrayList<MovieModel>>>
 
     @GET(SINGLE_MOVIE)

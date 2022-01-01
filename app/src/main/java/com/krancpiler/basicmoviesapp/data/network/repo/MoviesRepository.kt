@@ -9,8 +9,8 @@ class MoviesRepository(
     suspend fun getTrendingMovies(mediaType: String, timeWindow: String)
         = moviesService.getTrendingMovies(mediaType, timeWindow)
 
-    suspend fun searchMovies(keyword: String)
-        = moviesService.searchMovies(keyword)
+    suspend fun searchMovies(keyword: String, page:Int)
+        = moviesService.searchMovies(keyword, page)
 
     suspend fun getSingleMovie(movieId: Int)
         = moviesService.getSingleMovieInfo(movieId)

@@ -19,7 +19,7 @@ class SingleMovieFragment: Fragment() {
 
     private lateinit var binding: FragmentSingleMovieBinding
     private val singleMovieViewModel: SingleMovieViewModel by viewModels()
-    val args: SingleMovieFragmentArgs by navArgs()
+    private val args: SingleMovieFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,

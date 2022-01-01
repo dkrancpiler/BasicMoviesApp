@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.krancpiler.basicmoviesapp.data.network.models.SingleMovieDetails
 import com.krancpiler.basicmoviesapp.data.network.repo.MoviesRepository
-import com.krancpiler.basicmoviesapp.utility.getErrorMessageFromListRequest
 import com.krancpiler.basicmoviesapp.utility.getErrorMessageFromRequests
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
