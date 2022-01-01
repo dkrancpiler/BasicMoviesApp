@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.data.storage.entities.UserModel
 import com.krancpiler.basicmoviesapp.databinding.FragmentLoginBinding
+import com.krancpiler.basicmoviesapp.utility.dismissProgress
+import com.krancpiler.basicmoviesapp.utility.showProgress
 import com.krancpiler.basicmoviesapp.utility.showSimpleMessageDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,21 +39,29 @@ class LoginFragment : Fragment() {
     private fun setUpObservers() {
         loginViewModel.loginSessionResponse.observe(viewLifecycleOwner, {
             if (it.success) loginViewModel.createLastingSession()
+            else dismissProgress()
         })
         loginViewModel.lastingSessionResponse.observe(viewLifecycleOwner, {
             val userModel = UserModel(0, it.session_id, binding.usernameInput.text.toString(), true)
-            loginViewModel.storeUserInfo(userModel)
-            findNavController().navigate(R.id.loginToHome)
+            proceedToHome(userModel)
         })
         loginViewModel.errorMessage.observe(viewLifecycleOwner, {
             if (it != null) {
+                dismissProgress()
                 showSimpleMessageDialog(it)
+            }
+        })
+        loginViewModel.guestSessionResponse.observe(viewLifecycleOwner, {
+            if (it != null) {
+                val userModel = UserModel(0, it.guest_session_id, resources.getString(R.string.guest), false)
+                proceedToHome(userModel)
             }
         })
     }
 
     private fun init() {
         binding.finishLoginButton.setOnClickListener {
+            showProgress()
             val username = binding.usernameInput.text.toString()
             val password = binding.passwordInput.text.toString()
             loginViewModel.createLoginSession(
@@ -68,6 +78,16 @@ class LoginFragment : Fragment() {
                 true
             } else false
         }
+        binding.guestLoginButton.setOnClickListener {
+            showProgress()
+            loginViewModel.createGuestSession()
+        }
+    }
+
+    private fun proceedToHome(userModel: UserModel) {
+        loginViewModel.storeUserInfo(userModel)
+        dismissProgress()
+        findNavController().navigate(R.id.loginToHome)
     }
 
     private fun fetchData() {

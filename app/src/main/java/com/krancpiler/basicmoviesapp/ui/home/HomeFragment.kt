@@ -12,10 +12,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.krancpiler.basicmoviesapp.MainActivity
 import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.databinding.FragmentHomeBinding
+import com.krancpiler.basicmoviesapp.ui.home.singleMovie.SingleMovieFragmentDirections
 import com.krancpiler.basicmoviesapp.utility.changeToolbarTitle
 import com.krancpiler.basicmoviesapp.utility.dismissProgress
 import com.krancpiler.basicmoviesapp.utility.showProgress
@@ -59,7 +61,12 @@ class HomeFragment: Fragment() {
     private fun setUpObservers() {
         homeViewModel.trendingList.observe(viewLifecycleOwner, {
             if (it != null) {
-                binding.trendingRecycler.adapter = TrendingAdapter(it)
+                val adapter = TrendingAdapter(it)
+                binding.trendingRecycler.adapter = adapter
+                adapter.onItemClick = {movieModel ->
+                    val action = HomeFragmentDirections.homeToSingle(movieModel.id, movieModel.title)
+                    findNavController().navigate(action)
+                }
                 dismissProgress()
             }
         })

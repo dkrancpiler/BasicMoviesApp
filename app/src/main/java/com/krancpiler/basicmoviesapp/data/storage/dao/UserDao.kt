@@ -9,7 +9,7 @@ import com.krancpiler.basicmoviesapp.data.storage.entities.UserModel
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user")
-    fun getUser(): UserModel
+    fun getUser(): UserModel?
 
     @Insert
     suspend fun insertUser (user: UserModel)

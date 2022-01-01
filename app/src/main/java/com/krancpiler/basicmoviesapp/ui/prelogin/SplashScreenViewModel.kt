@@ -11,7 +11,7 @@ class SplashScreenViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ): ViewModel() {
 
-    fun getUserInfo(): UserModel {
+    fun getUserInfo(): UserModel? {
         return authRepository.getUserInfo()
     }
 

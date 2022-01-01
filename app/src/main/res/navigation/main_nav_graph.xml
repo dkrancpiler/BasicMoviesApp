@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.krancpiler.basicmoviesapp.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/homeToSingle"
+            app:destination="@id/singleMovieFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.krancpiler.basicmoviesapp.ui.prelogin.LoginFragment"
@@ -50,4 +54,16 @@
         app:popExitAnim="@anim/nav_default_pop_exit_anim"
         app:popUpTo="@id/loginFragment"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/singleMovieFragment"
+        android:name="com.krancpiler.basicmoviesapp.ui.home.singleMovie.SingleMovieFragment"
+        android:label="SingleMovieFragment" >
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="movieName"
+            app:argType="string" />
+    </fragment>
 </navigation>

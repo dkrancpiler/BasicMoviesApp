@@ -29,7 +29,7 @@ class SplashScreenFragment: Fragment() {
 
     private fun checkUserInfo() {
         val userModel = splashScreenViewModel.getUserInfo()
-        if (userModel?.sessionId != null) findNavController().navigate(R.id.splashToHome)
+        if (userModel != null && userModel.isAuthorized) findNavController().navigate(R.id.splashToHome)
         else findNavController().navigate(R.id.splashToLogin)
     }
 }

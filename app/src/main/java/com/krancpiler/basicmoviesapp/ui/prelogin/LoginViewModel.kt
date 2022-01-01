@@ -3,13 +3,10 @@ package com.krancpiler.basicmoviesapp.ui.prelogin
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.krancpiler.basicmoviesapp.data.network.models.LastingSessionRequest
-import com.krancpiler.basicmoviesapp.data.network.models.LastingSessionResponse
-import com.krancpiler.basicmoviesapp.data.network.models.LoginSessionRequest
-import com.krancpiler.basicmoviesapp.data.network.models.RequestTokenResponse
+import com.krancpiler.basicmoviesapp.data.network.models.*
 import com.krancpiler.basicmoviesapp.data.network.repo.AuthRepository
 import com.krancpiler.basicmoviesapp.data.storage.entities.UserModel
-import com.krancpiler.basicmoviesapp.utility.getErrorMessageFromSessionRequests
+import com.krancpiler.basicmoviesapp.utility.getErrorMessageFromRequests
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,6 +19,7 @@ class LoginViewModel @Inject constructor(
     val requestTokenResponse = MutableLiveData<RequestTokenResponse>()
     val loginSessionResponse = MutableLiveData<RequestTokenResponse>()
     val lastingSessionResponse = MutableLiveData<LastingSessionResponse>()
+    val guestSessionResponse = MutableLiveData<GuestSessionResponse>()
     val errorMessage = MutableLiveData<String>()
 
     fun createRequestToken() {
@@ -31,7 +29,7 @@ class LoginViewModel @Inject constructor(
                 response.body()
             )
             else if (response.errorBody() != null) errorMessage.postValue(
-                getErrorMessageFromSessionRequests(response.errorBody()!!)
+                getErrorMessageFromRequests(response.errorBody()!!)
             )
         }
     }
@@ -44,7 +42,7 @@ class LoginViewModel @Inject constructor(
                 response.body()
             )
             else if (response.errorBody() != null) errorMessage.postValue(
-                getErrorMessageFromSessionRequests(response.errorBody()!!)
+                getErrorMessageFromRequests(response.errorBody()!!)
             )
         }
     }
@@ -58,7 +56,19 @@ class LoginViewModel @Inject constructor(
                 response.body()
             )
             else if (response.errorBody() != null) errorMessage.postValue(
-                getErrorMessageFromSessionRequests(response.errorBody()!!)
+                getErrorMessageFromRequests(response.errorBody()!!)
+            )
+        }
+    }
+
+    fun createGuestSession() {
+        viewModelScope.launch {
+            val response = authRepository.createGuestSession()
+            if (response.isSuccessful && response.body() != null) guestSessionResponse.postValue(
+                response.body()
+            )
+            else if (response.errorBody() != null) errorMessage.postValue(
+                getErrorMessageFromRequests(response.errorBody()!!)
             )
         }
     }
@@ -67,9 +77,5 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.storeUserInfo(userModel)
         }
-    }
-
-    fun getUserInfo(): UserModel {
-       return authRepository.getUserInfo()
     }
 }

@@ -20,9 +20,7 @@ fun Fragment.showProgress() {
 }
 
 fun Fragment.dismissProgress() {
-    val progressDialog: ProgressDialog =
-        (this.childFragmentManager.findFragmentByTag(PROGRESS_DIALOG_TAG) as ProgressDialog)
-    if (progressDialog != null) progressDialog.dismiss()
+    (childFragmentManager.findFragmentByTag(PROGRESS_DIALOG_TAG) as ProgressDialog?)?.dismiss()
 }
 
 fun Fragment.showSimpleMessageDialog(message: String) {
@@ -36,13 +34,13 @@ fun Fragment.changeToolbarTitle(title: String) {
 }
 // View Models
 
-fun ViewModel.getErrorMessageFromRequest(errorBody: ResponseBody): String {
+fun ViewModel.getErrorMessageFromListRequest(errorBody: ResponseBody): String {
     val jsonObject = JSONObject(errorBody.string())
     val errorsArray: JSONArray = jsonObject.getJSONArray(NETWORK_ERROR_ARRAY_VALUE)
     return errorsArray.get(0).toString()
 }
 
-fun ViewModel.getErrorMessageFromSessionRequests(errorBody: ResponseBody): String {
+fun ViewModel.getErrorMessageFromRequests(errorBody: ResponseBody): String {
     val jsonObject = JSONObject(errorBody.string())
     return jsonObject.getString(NETWORK_ERROR_GENERATE_SESSION)
 }

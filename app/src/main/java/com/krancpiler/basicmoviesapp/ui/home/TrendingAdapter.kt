@@ -13,6 +13,8 @@ import com.krancpiler.basicmoviesapp.data.network.models.MovieModel
 
 class TrendingAdapter (private val data: ArrayList<MovieModel>): RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>() {
 
+    var onItemClick: ((MovieModel) -> Unit)? = null
+
     class TrendingViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val imageView = view.findViewById<AppCompatImageView>(R.id.trending_image)
     }
@@ -23,6 +25,9 @@ class TrendingAdapter (private val data: ArrayList<MovieModel>): RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
+        holder.imageView.setOnClickListener{
+            onItemClick?.invoke(data[position])
+        }
         if (!data[position].poster_path.equals(null)) {
             Glide.with(holder.itemView.context)
                 .load(BuildConfig.MOVIES_IMAGE_URL + data[position].poster_path)

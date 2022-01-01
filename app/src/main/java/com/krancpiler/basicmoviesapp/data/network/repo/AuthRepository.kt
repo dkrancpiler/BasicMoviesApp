@@ -16,9 +16,11 @@ class AuthRepository(
 
     suspend fun createLastingSession(lastingSessionRequest: LastingSessionRequest) = authService.createLastingSession(lastingSessionRequest)
 
+    suspend fun createGuestSession() = authService.createGuestSession()
+
     suspend fun storeUserInfo(userModel: UserModel) = userDao.insertUser(userModel)
 
-    suspend fun deleteUserInfo() = userDao.delete(userDao.getUser())
+    suspend fun deleteUserInfo() = userDao.delete(userDao.getUser()!!)
 
     fun getUserInfo() = userDao.getUser()
 

@@ -2,8 +2,11 @@
     <string name="app_name">BasicMoviesApp</string>
     <string name="progress_dialog_message">Please wait</string>
     <string name="confirm">ok</string>
+    <string name="login">Login</string>
+    <string name="guest_login">Proceed as guest</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="logout">Logout</string>
     <string name="movies">Movies</string>
+    <string name="guest">Guest</string>
 </resources>

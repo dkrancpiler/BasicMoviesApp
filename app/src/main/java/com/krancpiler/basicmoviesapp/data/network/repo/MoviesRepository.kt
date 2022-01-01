@@ -11,4 +11,7 @@ class MoviesRepository(
 
     suspend fun searchMovies(keyword: String)
         = moviesService.searchMovies(keyword)
+
+    suspend fun getSingleMovie(movieId: Int)
+        = moviesService.getSingleMovieInfo(movieId)
 }
