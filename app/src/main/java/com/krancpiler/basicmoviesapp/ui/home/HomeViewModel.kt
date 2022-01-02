@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.krancpiler.basicmoviesapp.data.network.models.MovieModel
 import com.krancpiler.basicmoviesapp.data.network.repo.MoviesRepository
+import com.krancpiler.basicmoviesapp.ui.BaseViewModel
 import com.krancpiler.basicmoviesapp.utility.getErrorMessageFromListRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,10 +14,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val moviesRepository: MoviesRepository
-): ViewModel() {
+): BaseViewModel() {
 
     val trendingList = MutableLiveData<ArrayList<MovieModel>>()
-    val errorMessage = MutableLiveData<String>()
 
     fun getTrendingMovies () {
         viewModelScope.launch {

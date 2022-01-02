@@ -1,13 +1,17 @@
 package com.krancpiler.basicmoviesapp.utility
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.krancpiler.basicmoviesapp.MainActivity
+import com.krancpiler.basicmoviesapp.ui.dialogs.NoConnectionDialog
 import com.krancpiler.basicmoviesapp.ui.dialogs.ProgressDialog
 import com.krancpiler.basicmoviesapp.ui.dialogs.SimpleMessageDialog
 import com.krancpiler.basicmoviesapp.utility.RegularConstants.NETWORK_ERROR_ARRAY_VALUE
 import com.krancpiler.basicmoviesapp.utility.RegularConstants.NETWORK_ERROR_GENERATE_SESSION
+import com.krancpiler.basicmoviesapp.utility.RegularConstants.NO_CONNECTION_DIALOG_TAG
 import com.krancpiler.basicmoviesapp.utility.RegularConstants.PROGRESS_DIALOG_TAG
 import com.krancpiler.basicmoviesapp.utility.RegularConstants.SIMPLE_MESSAGE_DIALOG_TAG
 import okhttp3.ResponseBody
@@ -32,12 +36,23 @@ fun Fragment.showSimpleMessageDialog(message: String) {
 }
 
 fun Fragment.changeToolbarTitle(title: String) {
-    val activity = this.activity as MainActivity
+    val activity = requireActivity() as MainActivity
     activity.changeToolbarTitle(title)
 }
 
 fun Fragment.showToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.checkNetworkConnectivity(): Boolean {
+    val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+    return capabilities != null
+}
+
+fun Fragment.showNoConnectionDialog() {
+    val activity = requireActivity() as MainActivity
+    NoConnectionDialog(activity).show(childFragmentManager, NO_CONNECTION_DIALOG_TAG)
 }
 
 // View Models

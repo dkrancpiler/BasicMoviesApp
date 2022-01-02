@@ -14,15 +14,21 @@ import com.krancpiler.basicmoviesapp.BuildConfig
 import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.data.network.models.SingleMovieDetailsResponse
 import com.krancpiler.basicmoviesapp.databinding.FragmentSingleMovieBinding
+import com.krancpiler.basicmoviesapp.ui.BaseFragment
+import com.krancpiler.basicmoviesapp.ui.BaseViewModel
 import com.krancpiler.basicmoviesapp.utility.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SingleMovieFragment : Fragment() {
+class SingleMovieFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSingleMovieBinding
     private val singleMovieViewModel: SingleMovieViewModel by viewModels()
     private val args: SingleMovieFragmentArgs by navArgs()
+
+    override fun setUpErrorListening(viewModel: BaseViewModel) {
+        singleMovieViewModel
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

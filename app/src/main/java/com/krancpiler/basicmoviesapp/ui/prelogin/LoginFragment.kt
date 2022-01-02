@@ -13,13 +13,14 @@ import androidx.navigation.fragment.findNavController
 import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.data.storage.entities.UserModel
 import com.krancpiler.basicmoviesapp.databinding.FragmentLoginBinding
+import com.krancpiler.basicmoviesapp.ui.BaseFragment
 import com.krancpiler.basicmoviesapp.utility.dismissProgress
 import com.krancpiler.basicmoviesapp.utility.showProgress
 import com.krancpiler.basicmoviesapp.utility.showSimpleMessageDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()

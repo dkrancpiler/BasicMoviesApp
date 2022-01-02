@@ -9,10 +9,11 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import com.krancpiler.basicmoviesapp.databinding.ActivityMainBinding
+import com.krancpiler.basicmoviesapp.ui.dialogs.NoConnectionDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NoConnectionDialog.NoConnectionConfirmation  {
 
     private lateinit var binding:ActivityMainBinding
     private val mainViewModel: MainSharedViewModel by viewModels()
@@ -55,5 +56,9 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.deleteUserInfo()
         }
         super.onDestroy()
+    }
+
+    override fun noConnectionDialogClosed() {
+        finish()
     }
 }

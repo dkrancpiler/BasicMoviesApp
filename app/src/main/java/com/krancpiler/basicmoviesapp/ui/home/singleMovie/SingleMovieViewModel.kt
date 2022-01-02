@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.krancpiler.basicmoviesapp.data.network.models.SingleMovieDetailsResponse
 import com.krancpiler.basicmoviesapp.data.network.repo.MoviesRepository
+import com.krancpiler.basicmoviesapp.ui.BaseViewModel
 import com.krancpiler.basicmoviesapp.utility.CustomEnums
 import com.krancpiler.basicmoviesapp.utility.getErrorMessageFromRequests
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,10 +16,9 @@ import javax.inject.Inject
 @HiltViewModel
 class SingleMovieViewModel @Inject constructor(
     private val moviesRepository: MoviesRepository
-): ViewModel() {
+): BaseViewModel() {
 
     val singleMovieDetails = MutableLiveData<SingleMovieDetailsResponse>()
-    val errorMessage = MutableLiveData<String>()
 
     fun getSingleMovie(movieId: Int) {
         viewModelScope.launch {

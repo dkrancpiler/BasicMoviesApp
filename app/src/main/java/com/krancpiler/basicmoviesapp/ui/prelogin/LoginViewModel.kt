@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.krancpiler.basicmoviesapp.data.network.models.*
 import com.krancpiler.basicmoviesapp.data.network.repo.AuthRepository
 import com.krancpiler.basicmoviesapp.data.storage.entities.UserModel
+import com.krancpiler.basicmoviesapp.ui.BaseViewModel
 import com.krancpiler.basicmoviesapp.utility.getErrorMessageFromRequests
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,13 +15,12 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     val requestTokenResponse = MutableLiveData<RequestTokenResponse>()
     val loginSessionResponse = MutableLiveData<RequestTokenResponse>()
     val lastingSessionResponse = MutableLiveData<LastingSessionResponse>()
     val guestSessionResponse = MutableLiveData<GuestSessionResponse>()
-    val errorMessage = MutableLiveData<String>()
 
     fun createRequestToken() {
         viewModelScope.launch {

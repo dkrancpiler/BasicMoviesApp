@@ -12,6 +12,8 @@ import com.krancpiler.basicmoviesapp.MainActivity
 import com.krancpiler.basicmoviesapp.MainNavGraphDirections
 import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.databinding.FragmentHomeBinding
+import com.krancpiler.basicmoviesapp.ui.BaseFragment
+import com.krancpiler.basicmoviesapp.ui.BaseViewModel
 import com.krancpiler.basicmoviesapp.utility.changeToolbarTitle
 import com.krancpiler.basicmoviesapp.utility.dismissProgress
 import com.krancpiler.basicmoviesapp.utility.showProgress
@@ -19,10 +21,14 @@ import com.krancpiler.basicmoviesapp.utility.showSimpleMessageDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment: Fragment() {
+class HomeFragment: BaseFragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
+
+    override fun setUpErrorListening(viewModel: BaseViewModel) {
+        homeViewModel
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,11 +60,6 @@ class HomeFragment: Fragment() {
                     findNavController().navigate(action)
                 }
                 dismissProgress()
-            }
-        })
-        homeViewModel.errorMessage.observe(viewLifecycleOwner, {
-            if (it != null) {
-                showSimpleMessageDialog(it)
             }
         })
     }

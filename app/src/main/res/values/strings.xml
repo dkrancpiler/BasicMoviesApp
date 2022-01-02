@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BasicMoviesApp</string>
+    <string name="app_name">Movies Demo</string>
     <string name="progress_dialog_message">Please wait</string>
     <string name="confirm">ok</string>
     <string name="login">Login</string>
@@ -11,13 +11,14 @@
     <string name="guest">Guest</string>
     <string name="search_hint">Search for a movie</string>
     <string name="description_title">Movie description: </string>
-    <string name="reviews">Reviews (%s total)</string>
+    <string name="not_yet_implemented">Not yet implemented!</string>
+    <string name="no_connection">No internet connection, please turn it on and restart the app.</string>
     <string name="see_more">See more</string>
+
     <string name="review_total_count">Number of reviews: %s</string>
     <string name="review_author_name_placeholder">Author: %s</string>
     <string name="review_rating_placeholder">Rating: %s</string>
-    <string name="not_yet_implemented">Not yet implemented!</string>
-    
+    <string name="reviews">Reviews (%s total)</string>
     <string name="search_fragment_title">Search for: %s</string>
     <string name="surround_with_parentheses">(%s)</string>
 </resources>

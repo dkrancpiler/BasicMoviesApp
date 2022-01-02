@@ -9,10 +9,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.databinding.FragmentSplashScreenBinding
+import com.krancpiler.basicmoviesapp.ui.BaseFragment
+import com.krancpiler.basicmoviesapp.ui.BaseViewModel
+import com.krancpiler.basicmoviesapp.utility.checkNetworkConnectivity
+import com.krancpiler.basicmoviesapp.utility.showNoConnectionDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SplashScreenFragment: Fragment() {
+class SplashScreenFragment: BaseFragment() {
+    override fun setUpErrorListening(viewModel: BaseViewModel) {
+        splashScreenViewModel
+    }
 
     private lateinit var binding: FragmentSplashScreenBinding
     private val splashScreenViewModel: SplashScreenViewModel by viewModels()
@@ -28,8 +35,12 @@ class SplashScreenFragment: Fragment() {
     }
 
     private fun checkUserInfo() {
-        val userModel = splashScreenViewModel.getUserInfo()
-        if (userModel != null && userModel.isAuthorized) findNavController().navigate(R.id.splashToHome)
-        else findNavController().navigate(R.id.globalActionLogin)
+        if (checkNetworkConnectivity()) {
+            val userModel = splashScreenViewModel.getUserInfo()
+            if (userModel != null && userModel.isAuthorized) findNavController().navigate(R.id.splashToHome)
+            else findNavController().navigate(R.id.globalActionLogin)
+        } else {
+            showNoConnectionDialog()
+        }
     }
 }

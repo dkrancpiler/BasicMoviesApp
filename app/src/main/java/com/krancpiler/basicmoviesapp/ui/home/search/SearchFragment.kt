@@ -15,6 +15,7 @@ import androidx.paging.map
 import com.krancpiler.basicmoviesapp.MainNavGraphDirections
 import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.databinding.FragmentSearchBinding
+import com.krancpiler.basicmoviesapp.ui.BaseFragment
 import com.krancpiler.basicmoviesapp.utility.changeToolbarTitle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -24,7 +25,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private val searchViewModel: SearchViewModel by viewModels()
