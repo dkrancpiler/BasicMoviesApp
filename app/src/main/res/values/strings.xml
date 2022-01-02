@@ -16,6 +16,7 @@
     <string name="review_total_count">Number of reviews: %s</string>
     <string name="review_author_name_placeholder">Author: %s</string>
     <string name="review_rating_placeholder">Rating: %s</string>
+    <string name="not_yet_implemented">Not yet implemented!</string>
     
     <string name="search_fragment_title">Search for: %s</string>
     <string name="surround_with_parentheses">(%s)</string>

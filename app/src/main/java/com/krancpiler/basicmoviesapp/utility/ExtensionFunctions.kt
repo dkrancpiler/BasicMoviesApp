@@ -1,5 +1,6 @@
 package com.krancpiler.basicmoviesapp.utility
 
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.krancpiler.basicmoviesapp.MainActivity
@@ -33,6 +34,10 @@ fun Fragment.showSimpleMessageDialog(message: String) {
 fun Fragment.changeToolbarTitle(title: String) {
     val activity = this.activity as MainActivity
     activity.changeToolbarTitle(title)
+}
+
+fun Fragment.showToast(message: String) {
+    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 }
 
 // View Models

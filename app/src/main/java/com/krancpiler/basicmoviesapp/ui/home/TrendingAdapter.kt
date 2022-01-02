@@ -14,17 +14,19 @@ import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.data.network.models.MovieModel
 import com.krancpiler.basicmoviesapp.utility.getYearFromString
 
-class TrendingAdapter (private val data: ArrayList<MovieModel>): RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>() {
+class TrendingAdapter(private val data: ArrayList<MovieModel>) :
+    RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>() {
 
     var onItemClick: ((MovieModel) -> Unit)? = null
 
-    class TrendingViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class TrendingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val trendingImage: AppCompatImageView = view.findViewById(R.id.trending_image)
         val trendingTitle: AppCompatTextView = view.findViewById(R.id.title_text)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_trending, parent, false)
+        val view: View =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_trending, parent, false)
         return TrendingViewHolder(view)
     }
 
@@ -32,9 +34,14 @@ class TrendingAdapter (private val data: ArrayList<MovieModel>): RecyclerView.Ad
         val movieModel = data[position]
         val date =
             if (movieModel.release_date.isEmpty()) "" else movieModel.release_date.getYearFromString()
-        val titleText = movieModel.title + " " + String.format(holder.itemView.resources.getString(R.string.surround_with_parentheses, date))
+        val titleText = movieModel.title + " " + String.format(
+            holder.itemView.resources.getString(
+                R.string.surround_with_parentheses,
+                date
+            )
+        )
         holder.trendingTitle.text = titleText
-        holder.trendingImage.setOnClickListener{
+        holder.trendingImage.setOnClickListener {
             onItemClick?.invoke(movieModel)
         }
         if (!movieModel.poster_path.equals(null)) {

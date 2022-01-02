@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -13,10 +14,7 @@ import com.krancpiler.basicmoviesapp.BuildConfig
 import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.data.network.models.SingleMovieDetailsResponse
 import com.krancpiler.basicmoviesapp.databinding.FragmentSingleMovieBinding
-import com.krancpiler.basicmoviesapp.utility.changeToolbarTitle
-import com.krancpiler.basicmoviesapp.utility.dismissProgress
-import com.krancpiler.basicmoviesapp.utility.showProgress
-import com.krancpiler.basicmoviesapp.utility.showSimpleMessageDialog
+import com.krancpiler.basicmoviesapp.utility.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,6 +48,9 @@ class SingleMovieFragment : Fragment() {
             dismissProgress()
             setUpLayout(it)
         })
+        binding.reviewsSeeMore.setOnClickListener {
+            showToast(resources.getString(R.string.not_yet_implemented))
+        }
     }
 
     private fun setUpLayout(singleMovieDetailsResponse: SingleMovieDetailsResponse) {

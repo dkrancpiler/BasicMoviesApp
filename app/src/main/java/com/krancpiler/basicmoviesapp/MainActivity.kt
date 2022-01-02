@@ -51,7 +51,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        if (mainViewModel.getUserInfo() != null && !mainViewModel.getUserInfo()?.isAuthorized!!) mainViewModel.deleteUserInfo()
+        if (mainViewModel.getUserInfo() != null && !mainViewModel.getUserInfo()?.isAuthorized!!) {
+            mainViewModel.deleteUserInfo()
+        }
         super.onDestroy()
     }
 }
