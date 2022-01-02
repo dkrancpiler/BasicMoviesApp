@@ -13,7 +13,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import androidx.paging.map
 import com.krancpiler.basicmoviesapp.MainNavGraphDirections
+import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.databinding.FragmentSearchBinding
+import com.krancpiler.basicmoviesapp.utility.changeToolbarTitle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -41,16 +43,17 @@ class SearchFragment : Fragment() {
     }
 
     private fun init() {
+        changeToolbarTitle(String.format(resources.getString(R.string.search_fragment_title, args.searchQuery)))
         searchAdapter = SearchAdapter(SearchAdapter.MovieComparator)
         searchAdapter.onItemClick = { movieModel ->
             val action =
                 MainNavGraphDirections.globalActionSingleMovie(movieModel.id, movieModel.title)
             findNavController().navigate(action)
         }
-        searchAdapter.addLoadStateListener { loadState ->
-            if (loadState.append.endOfPaginationReached) {}
-            else{}
-        }
+//        searchAdapter.addLoadStateListener { loadState ->
+//            if (loadState.append.endOfPaginationReached) {}
+//            else{}
+//        }
         val searchRecyclerView = binding.searchRecycler
         searchRecyclerView.adapter = searchAdapter
     }

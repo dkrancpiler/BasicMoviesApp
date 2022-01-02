@@ -9,6 +9,14 @@
     <string name="logout">Logout</string>
     <string name="movies">Movies</string>
     <string name="guest">Guest</string>
-
+    <string name="search_hint">Search for a movie</string>
+    <string name="description_title">Movie description: </string>
+    <string name="reviews">Reviews (%s total)</string>
+    <string name="see_more">See more</string>
+    <string name="review_total_count">Number of reviews: %s</string>
+    <string name="review_author_name_placeholder">Author: %s</string>
+    <string name="review_rating_placeholder">Rating: %s</string>
+    
+    <string name="search_fragment_title">Search for: %s</string>
     <string name="surround_with_parentheses">(%s)</string>
 </resources>

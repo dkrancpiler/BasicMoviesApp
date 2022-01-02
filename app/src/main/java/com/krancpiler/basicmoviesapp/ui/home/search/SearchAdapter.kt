@@ -15,21 +15,28 @@ import com.krancpiler.basicmoviesapp.R
 import com.krancpiler.basicmoviesapp.data.network.models.MovieModel
 import com.krancpiler.basicmoviesapp.utility.getYearFromString
 
-class SearchAdapter(diffCallback: DiffUtil.ItemCallback<MovieModel>): PagingDataAdapter<MovieModel, SearchAdapter.SearchViewHolder>(diffCallback) {
+class SearchAdapter(diffCallback: DiffUtil.ItemCallback<MovieModel>) :
+    PagingDataAdapter<MovieModel, SearchAdapter.SearchViewHolder>(diffCallback) {
 
     var onItemClick: ((MovieModel) -> Unit)? = null
 
-    class SearchViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val searchImage: AppCompatImageView = view.findViewById(R.id.search_image)
         val searchTitle: AppCompatTextView = view.findViewById(R.id.title_text)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val movieModel = getItem(position)!!
-        val date = movieModel.release_date.getYearFromString()
-        val titleText = movieModel.title + " " + String.format(holder.itemView.resources.getString(R.string.surround_with_parentheses, date))
+        val date =
+            if (movieModel.release_date.isEmpty()) "" else movieModel.release_date.getYearFromString()
+        val titleText = movieModel.title + " " + String.format(
+            holder.itemView.resources.getString(
+                R.string.surround_with_parentheses,
+                date
+            )
+        )
         holder.searchTitle.text = titleText
-        holder.searchImage.setOnClickListener{
+        holder.searchImage.setOnClickListener {
             onItemClick?.invoke(movieModel)
         }
         if (movieModel.poster_path != null) {
@@ -49,11 +56,12 @@ class SearchAdapter(diffCallback: DiffUtil.ItemCallback<MovieModel>): PagingData
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_search, parent, false)
+        val view: View =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_search, parent, false)
         return SearchViewHolder(view)
     }
 
-    object MovieComparator: DiffUtil.ItemCallback<MovieModel>() {
+    object MovieComparator : DiffUtil.ItemCallback<MovieModel>() {
         override fun areItemsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean {
             return oldItem.id == newItem.id
         }

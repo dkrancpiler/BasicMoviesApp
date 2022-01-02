@@ -2,7 +2,7 @@ package com.krancpiler.basicmoviesapp.data.network.services
 
 import com.krancpiler.basicmoviesapp.data.network.models.BasePaginatedResponse
 import com.krancpiler.basicmoviesapp.data.network.models.MovieModel
-import com.krancpiler.basicmoviesapp.data.network.models.SingleMovieDetails
+import com.krancpiler.basicmoviesapp.data.network.models.SingleMovieDetailsResponse
 import com.krancpiler.basicmoviesapp.utility.APIConstants.SEARCH_MOVIES
 import com.krancpiler.basicmoviesapp.utility.APIConstants.SINGLE_MOVIE
 import com.krancpiler.basicmoviesapp.utility.APIConstants.TRENDING_MOVIES
@@ -26,7 +26,8 @@ interface MoviesService {
 
     @GET(SINGLE_MOVIE)
     suspend fun getSingleMovieInfo(
-        @Path ("movie_id") movieId: Int
-    ) : Response<SingleMovieDetails>
+        @Path ("movie_id") movieId: Int,
+        @Query ("append_to_response") additionalData: String
+    ) : Response<SingleMovieDetailsResponse>
 
 }

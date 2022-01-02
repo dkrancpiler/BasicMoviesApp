@@ -8,7 +8,9 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
+        android:background="@drawable/background_gradient_green"
         android:visibility="gone"
+        android:paddingBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,6 +21,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/toolbar_title"
+                style="@style/ToolbarTitleStyle"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +43,10 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/search_edit_text"
                 android:layout_marginTop="10dp"
-                android:hint="Search Text"
+                style="@style/SearchInputStyle"
+                android:hint="@string/search_hint"
                 android:drawableStart="@drawable/search_icon"
+                android:background="@color/lightGray"
                 android:maxLines="1"
                 android:textAlignment="center"
                 android:inputType="text"
@@ -60,6 +65,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/background_gradient_light_blue"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

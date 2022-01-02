@@ -7,6 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.krancpiler.basicmoviesapp.BuildConfig
+import com.krancpiler.basicmoviesapp.R
+import com.krancpiler.basicmoviesapp.data.network.models.SingleMovieDetailsResponse
 import com.krancpiler.basicmoviesapp.databinding.FragmentSingleMovieBinding
 import com.krancpiler.basicmoviesapp.utility.changeToolbarTitle
 import com.krancpiler.basicmoviesapp.utility.dismissProgress
@@ -15,7 +20,7 @@ import com.krancpiler.basicmoviesapp.utility.showSimpleMessageDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SingleMovieFragment: Fragment() {
+class SingleMovieFragment : Fragment() {
 
     private lateinit var binding: FragmentSingleMovieBinding
     private val singleMovieViewModel: SingleMovieViewModel by viewModels()
@@ -43,7 +48,46 @@ class SingleMovieFragment: Fragment() {
         })
         singleMovieViewModel.singleMovieDetails.observe(viewLifecycleOwner, {
             dismissProgress()
+            setUpLayout(it)
         })
+    }
+
+    private fun setUpLayout(singleMovieDetailsResponse: SingleMovieDetailsResponse) {
+        Glide.with(requireContext())
+            .load(BuildConfig.MOVIES_IMAGE_URL + singleMovieDetailsResponse.backdrop_path)
+            .fitCenter()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(binding.posterImage)
+        binding.descriptionText.text = singleMovieDetailsResponse.overview
+        if (singleMovieDetailsResponse.reviews.results.size != 0) {
+            val review = singleMovieDetailsResponse.reviews.results[0]
+            val rating = review.author_details.rating
+            binding.reviewsTitle.text = String.format(
+                resources.getString(
+                    R.string.review_total_count,
+                    singleMovieDetailsResponse.reviews.total_results.toString()
+                )
+            )
+            binding.singleReviewItem.reviewAuthorName.text = String.format(
+                resources.getString(
+                    R.string.review_author_name_placeholder,
+                    review.author
+                )
+            )
+            if (rating != null) binding.singleReviewItem.reviewRatingText.text = String.format(
+                resources.getString(
+                    R.string.review_rating_placeholder,
+                    rating.toString()
+                )
+            )
+            else binding.singleReviewItem.reviewRatingText.text = String.format(
+                resources.getString(
+                    R.string.review_rating_placeholder,
+                    "N/A"
+                )
+            )
+            binding.singleReviewItem.reviewContent.text = review.content
+        } else binding.reviewsLayout.visibility = View.GONE
     }
 
     private fun fetchData() {

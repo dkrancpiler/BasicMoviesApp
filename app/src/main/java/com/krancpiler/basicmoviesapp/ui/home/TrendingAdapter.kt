@@ -30,7 +30,8 @@ class TrendingAdapter (private val data: ArrayList<MovieModel>): RecyclerView.Ad
 
     override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
         val movieModel = data[position]
-        val date = movieModel.release_date.getYearFromString()
+        val date =
+            if (movieModel.release_date.isEmpty()) "" else movieModel.release_date.getYearFromString()
         val titleText = movieModel.title + " " + String.format(holder.itemView.resources.getString(R.string.surround_with_parentheses, date))
         holder.trendingTitle.text = titleText
         holder.trendingImage.setOnClickListener{

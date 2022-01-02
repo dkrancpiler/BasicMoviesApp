@@ -10,7 +10,7 @@
         android:id="@+id/trending_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/standard_vertical_padding"
+        android:paddingVertical="15dp"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

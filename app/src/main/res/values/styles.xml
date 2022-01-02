@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SearchInputStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:backgroundTint">@color/lightGray</item>
+        <item name="iconPadding">5dp</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="hintTextColor">@color/darkGray</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="ToolbarTitleStyle" parent="MainTextViewTheme">
+        <item name="android:textSize">@dimen/title_text_size</item>
+    </style>
+</resources>
